@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokens Calculators</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><strong><a href="/">Token Calculator</a> > Krenko</strong></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container-fluid">
+    <section>
+      <form id="krenko-form">
+        <fieldset>
+          <label>
+            Number of Krenkos
+            <input id="krenkos-input" type="number" name="krenkos" placeholder="0" aria-describedby="krenkos-helper" />
+            <small id="krenkos-helper">
+              That will be tapped
+            </small>
+          </label>
+          <label>
+            Number of Goblins
+            <input id="goblins-input" type="number" name="goblins" placeholder="0" aria-describedby="goblins-helper" />
+            <small id="goblins-helper">
+              Including Krenkos
+            </small>
+          </label>
+        </fieldset>
+      </form>
+    </section>
+    <section>
+      <p>Number of generated Goblin tokens: <span id="result"></span></p>
+    </section>
+  </main>
+
+  <script>
+    // T = g * (2 ^ k - 1)
+    // - T: number of generated tokens
+    // - g: number of goblins
+    // - k: number of Krenkos (that will be tapped)
+    const calculateGeneratedTokens = () => {
+      const krenkoForm = document.getElementById('krenko-form')
+      const { goblins, krenkos } = Object.fromEntries(new FormData(krenkoForm))
+
+      const generatedTokensCount = parseInt(goblins) * (Math.pow(2, parseInt(krenkos)) - 1)
+      document.getElementById('result').textContent = generatedTokensCount.toString()
+    }
+
+    document.getElementById('goblins-input').addEventListener('change', calculateGeneratedTokens)
+    document.getElementById('krenkos-input').addEventListener('change', calculateGeneratedTokens)
+  </script>
+</body>
+
+
+</html>

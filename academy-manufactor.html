@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokens Calculators</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><strong><a href="/">Token Calculator</a> > Academy Manufactor</strong></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container-fluid">
+    <section>
+      <form id="form">
+        <fieldset>
+          <label>
+            Number of Academy Manufactors
+            <input id="academy-manufactor-input" type="number" name="academy-manufactor" value="1" min="1" step="1" />
+        </fieldset>
+      </form>
+    </section>
+    <section>
+      <p>Number of generated tokens of each type: <span id="result"></span></p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('form')
+    form.addEventListener('submit', ev => ev.preventDefault())
+
+    // T = 3 ^ (n - 1)
+    // - T: number of generated tokens (of each type)
+    // - n: number of Academy Manufactors
+    const calculateGeneratedTokens = () => {
+      const { 'academy-manufactor': academyManufactor } = Object.fromEntries(new FormData(form))
+
+      const generatedTokensCount = Math.pow(3, academyManufactor - 1)
+      document.getElementById('result').textContent = generatedTokensCount.toString()
+    }
+
+    document.getElementById('academy-manufactor-input').addEventListener('change', calculateGeneratedTokens)
+  </script>
+</body>
+
+
+</html>

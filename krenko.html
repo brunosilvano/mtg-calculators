@@ -57,8 +57,16 @@
       document.getElementById('result').textContent = generatedTokensCount.toString()
     }
 
-    document.getElementById('goblins-input').addEventListener('input', calculateGeneratedTokens)
-    document.getElementById('krenkos-input').addEventListener('input', calculateGeneratedTokens)
+    const goblinsInput = document.getElementById('goblins-input')
+    goblinsInput.addEventListener('input', calculateGeneratedTokens)
+    document.getElementById('krenkos-input').addEventListener('input', ev => {
+      const krenkosCount = parseInt(ev.target.value)
+      const goblinsCount = parseInt(goblinsInput.value)
+      if (goblinsCount < krenkosCount) {
+        goblinsInput.value = krenkosCount.toString()
+      }
+      calculateGeneratedTokens()
+    })
   </script>
 </body>
 

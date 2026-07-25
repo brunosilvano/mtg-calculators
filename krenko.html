@@ -19,7 +19,7 @@
 
   <main class="container-fluid">
     <section>
-      <form id="krenko-form">
+      <form id="form">
         <fieldset>
           <label>
             Number of Krenkos
@@ -44,13 +44,14 @@
   </main>
 
   <script>
+    const form = document.getElementById('form')
+    form.addEventListener('submit', ev => ev.preventDefault())
     // T = g * (2 ^ k - 1)
     // - T: number of generated tokens
     // - g: number of goblins
     // - k: number of Krenkos (that will be tapped)
     const calculateGeneratedTokens = () => {
-      const krenkoForm = document.getElementById('krenko-form')
-      const { goblins, krenkos } = Object.fromEntries(new FormData(krenkoForm))
+      const { goblins, krenkos } = Object.fromEntries(new FormData(form))
 
       const generatedTokensCount = parseInt(goblins) * (Math.pow(2, parseInt(krenkos)) - 1)
       document.getElementById('result').textContent = generatedTokensCount.toString()

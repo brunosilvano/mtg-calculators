@@ -55,6 +55,8 @@
     const calculateGeneratedTokens = () => {
       const { goblins, krenkos } = Object.fromEntries(new FormData(form))
 
+      if (goblins < 1 || krenkos < 1) return
+
       const generatedTokensCount = parseInt(goblins) * (Math.pow(2, parseInt(krenkos)) - 1)
       document.getElementById('result').textContent = generatedTokensCount.toString()
     }

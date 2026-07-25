@@ -43,6 +43,8 @@
     const calculateGeneratedTokens = () => {
       const { 'academy-manufactor': academyManufactor } = Object.fromEntries(new FormData(form))
 
+      if (academyManufactor < 1) return
+
       const generatedTokensCount = Math.pow(3, academyManufactor - 1)
       document.getElementById('result').textContent = generatedTokensCount.toString()
     }
